@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zarsha 💖 Zain Valentine</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background: linear-gradient(to right, #ff4d6d, #ffc2d1);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      background: white;
+      padding: 35px;
+      border-radius: 25px;
+      box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.3);
+      max-width: 450px;
+      width: 90%;
+      z-index: 2;
+      position: relative;
+    }
+
+    h1 {
+      color: #ff004f;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #333;
+    }
+
+    .btns {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 14px 28px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-weight: bold;
+    }
+
+    #yesBtn {
+      background: #ff004f;
+      color: white;
+      font-size: 22px;
+    }
+
+    #noBtn {
+      background: #333;
+      color: white;
+      font-size: 20px;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+    }
+
+    #noBtn:hover {
+      transform: rotate(-3deg);
+    }
+
+    #funnyText {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ff004f;
+      min-height: 40px;
+    }
+
+    #finalMessage {
+      display: none;
+      margin-top: 25px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff004f;
+    }
+
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: float 4s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <div class="container">
+    <h1>💘 Zain baby Will You Be My Valentine🫣🫠? 💘</h1>
+    <p>From pyari Zarsha 🎀</p>
+
+    <div class="btns">
+      <button id="yesBtn">YES 🫠🥰</button>
+      <button id="noBtn">NO 😔🖕🏻</button>
+    </div>
+
+    <div id="funnyText"></div>
+
+    <div id="finalMessage">
+      YAYYYYY 😭💖💖💖 <br>
+      Zain chomu is officially Zarsha’s Valentine 😘🌹<br><br>
+      Now give me chocolate 🍫😂
+    </div>
+  </div>
+
+  <script>
+    let noClickCount = 0;
+
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const funnyText = document.getElementById("funnyText");
+    const finalMessage = document.getElementById("finalMessage");
+    const heartsContainer = document.getElementById("hearts");
+
+    const funnyMessages = [
+      "Excuse me?? 😭 YOU CLICKED NO??",
+      "HOW DARE YOU ZAIN 🙂💔",
+      "Try again...Ik galti sa dab gaya hoga 😌",
+      "NO?? Mtlb kay tumhy mere shakal nhi psnd ?🙄",
+      "yahan ya nahi likha kay apky L ka size 7 ha jo ap No pr click kr rhy ho🙂",
+      "phr sa No? ykw tum single he theek ho🖕🏻🙂",
+      "Mujhy pehly he pta tha tum mujhsy pyar nhi krty🙄💔",
+      "Ab kbhi eyes nhi bhejungi 😏",
+                     "You're still clicking NO?? meny Ro dena ha ab😭😭"
+    ];
+
+    // NO button click event
+    noBtn.addEventListener("click", () => {
+      noClickCount++;
+
+      // show funny message
+      funnyText.innerHTML = funnyMessages[noClickCount % funnyMessages.length];
+
+      // make YES bigger
+      let yesSize = 22 + noClickCount * 6;
+      yesBtn.style.fontSize = yesSize + "px";
+      yesBtn.style.padding = (14 + noClickCount * 2) + "px " + (28 + noClickCount * 4) + "px";
+
+      // make NO smaller
+      let noSize = 20 - noClickCount * 2;
+      if (noSize < 8) noSize = 8;
+      noBtn.style.fontSize = noSize + "px";
+      noBtn.style.padding = (14 - noClickCount) + "px " + (28 - noClickCount * 2) + "px";
+
+      // move NO button randomly (funny running effect)
+      noBtn.style.position = "absolute";
+      let x = Math.random() * (window.innerWidth - 120);
+      let y = Math.random() * (window.innerHeight - 120);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      // if too many NO clicks, force YES vibe 😂
+      if (noClickCount >= 10) {
+        funnyText.innerHTML = "OKAY STOP ✋🏻 You have no choice now hehehe👹... CLICK YES 💖😂";
+      }
+    });
+
+    // YES button click event
+    yesBtn.addEventListener("click", () => {
+      funnyText.innerHTML = "";
+      finalMessage.style.display = "block";
+
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+
+      // hearts rain animation
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+
+        const hearts = ["💖", "💘", "💕", "😍", "❤️", "🌹"];
+        heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 30 + 15 + "px";
+        heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }, 200);
+    });
+  </script>
+</body>
+</html>
